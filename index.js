@@ -34,6 +34,16 @@ app.get('/fact', function (request, response) {
   })
 })
 
+
+app.get('/fact_number', function (request, response) {
+
+  var pool = new pg.Pool(config);
+  pool.query('SELECT count(*) FROM fact;', function (err, res) {
+    if (err) throw err
+    response.send(res.rows[0]);
+  })
+})
+
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
 })
